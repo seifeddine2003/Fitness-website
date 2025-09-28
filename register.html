@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Create Account</title>
+  <link rel="stylesheet" href="register.css">
+  <link rel="icon" type="image/jpg" href="icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+  <div>
+    <img src="icon-removebg-preview.png" alt="website logo" class="logo">
+  </div>
+  <nav class="navigation">
+    <a href="index.html">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+    <button class="btnLogin-popup" onclick="window.location.href='login.html'">Login</button>
+  </nav>
+</header>
+
+<div class="registerbox">
+  <h2>Create Account</h2>
+  <form>
+    <div class="input-row">
+      <div class="input-box">
+        <input type="text" required>
+        <label>First Name</label>
+      </div>
+      <div class="input-box">
+        <input type="text" required>
+        <label>Last Name</label>
+      </div>
+    </div>
+
+    <div class="input-box full-width">
+      <input type="email" required>
+      <label>Email Address</label>
+    </div>
+
+    <div class="input-box full-width">
+      <input type="tel" required>
+      <label>Phone Number</label>
+    </div>
+
+    <div class="input-row three-columns">
+      <div class="input-box">
+        <input type="number" min="1" max="150" required>
+        <label>Age</label>
+      </div>
+      <div class="input-box">
+        <input type="number" min="30" max="300" step="0.1" required>
+        <label>Weight (kg)</label>
+      </div>
+      <div class="input-box">
+        <input type="number" min="100" max="250" step="0.1" required>
+        <label>Height (cm)</label>
+      </div>
+    </div>
+
+    <div class="input-box full-width">
+      <input type="password" required id="password">
+      <label>Password</label>
+      <div class="password-strength" id="strength"></div>
+    </div>
+
+    <div class="input-box full-width">
+      <input type="password" required id="confirmPassword">
+      <label>Confirm Password</label>
+    </div>
+
+    <div class="terms-checkbox">
+      <input type="checkbox" id="terms" required>
+      <label for="terms">
+        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+      </label>
+    </div>
+
+    <div class="terms-checkbox">
+      <input type="checkbox" id="newsletter">
+      <label for="newsletter">
+        Subscribe to our newsletter for updates and promotions
+      </label>
+    </div>
+
+    <button type="submit" class="register-btn">Create Account</button>
+
+    <div class="social-signup">
+      <p>Or sign up with:</p>
+      <div class="social-buttons">
+        <button type="button" class="social-btn">📧 Google</button>
+        <button type="button" class="social-btn">📘 Facebook</button>
+      </div>
+    </div>
+
+    <div class="login-link">
+      <p>Already have an account?</p>
+      <a href="login.html">Sign In</a>
+    </div>
+  </form>
+</div>
+</body>
+</html>
