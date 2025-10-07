@@ -1,19 +1,23 @@
-*{
-    margin:0px;
-    padding:0;
+/* Reset & base styles */
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-body{
+
+body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background: url('../images/background.jpg') no-repeat;
-    background-size: cover ;
+    background-size: cover;
     background-position: center;
 }
-header{
+
+/* Header */
+header {
     position: fixed;
     top: 0;
     left: 0;
@@ -24,10 +28,12 @@ header{
     align-items: center;
     z-index: 99;
 }
+
 .logo {
     width: 100px;
     height: auto;
 }
+
 .navigation a {
     position: relative;
     font-size: 1.1em;
@@ -36,50 +42,52 @@ header{
     font-weight: 500;
     margin-left: 20px;
 }
-.navigation a::after{
+
+.navigation a::after {
     content: '';
     position: absolute;
-    left:0;
+    left: 0;
     bottom: -6px;
     width: 100%;
     height: 3px;
     background: #fff;
     border-radius: 5px;
-    transform-origin:right;
-    transform:scaleX(0);
-    transition:transform .5s;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
 }
-.navigation a:hover::after{
+
+.navigation a:hover::after {
     transform: scaleX(1);
     transform-origin: left;
 }
 
-.navigation .btnLogin-popup{
+.navigation .btnLogin-popup {
     width: 130px;
     height: 50px;
-    background:transparent;
+    background: transparent;
     border: 2px solid #fafafa;
-    outline: none;
     border-radius: 10px;
-    cursor:pointer;
+    cursor: pointer;
     font-size: 1.2em;
-    color:#fff;
-    font-weight:500;
+    color: #fff;
+    font-weight: 500;
     margin-left: 20px;
     transition: .5s;
-
 }
-.navigation .btnLogin-popup:hover{
+
+.navigation .btnLogin-popup:hover {
     background: #fff;
     color: black;
 }
-.loginbox{
+
+/* Login form */
+.loginbox {
     position: relative;
     width: 400px;
-    height: 440px;
-    border:2px solid rgb(255,255,255,.5);
+    border: 2px solid rgba(255, 255, 255, .5);
     background-color: transparent;
-    backdrop-filter:blur(5px);
+    backdrop-filter: blur(5px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -95,7 +103,7 @@ header{
     text-align: center;
 }
 
-.loginbox > div {
+.loginbox form > div {
     width: 100%;
     margin-bottom: 20px;
     position: relative;
@@ -120,12 +128,7 @@ header{
     border-color: #fff;
 }
 
-.loginbox input[type="email"]::placeholder,
-.loginbox input[type="password"]::placeholder {
-    color: rgba(255, 255, 255, .7);
-}
-
-.loginbox div label {
+.loginbox label {
     position: absolute;
     top: 15px;
     left: 15px;
@@ -135,10 +138,8 @@ header{
     transition: .3s;
 }
 
-.loginbox input[type="email"]:focus + label,
-.loginbox input[type="password"]:focus + label,
-.loginbox input[type="email"]:valid + label,
-.loginbox input[type="password"]:valid + label {
+.loginbox input:focus + label,
+.loginbox input:valid + label {
     top: -10px;
     left: 10px;
     font-size: 12px;
@@ -148,37 +149,26 @@ header{
     border-radius: 4px;
 }
 
-.loginbox > div:nth-child(4) {
+/* Checkbox and forgot password */
+.loginbox .checkbox-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 14px;
 }
 
-.loginbox > div:nth-child(4) label {
-    position: static;
-    color: #fff;
-    cursor: pointer;
+.loginbox .checkbox-container label {
     display: flex;
     align-items: center;
-}
-
-.loginbox > div:nth-child(4) input[type="checkbox"] {
-    margin-right: 8px;
-    width: auto;
-    height: auto;
-}
-
-.loginbox > div:nth-child(4) a {
     color: #fff;
-    text-decoration: none;
-    font-size: 14px;
+    cursor: pointer;
 }
 
-.loginbox > div:nth-child(4) a:hover {
-    text-decoration: underline;
+.loginbox .checkbox-container input[type="checkbox"] {
+    margin-right: 8px;
 }
 
+/* Login button */
 .loginbox button {
     width: 100%;
     height: 50px;
@@ -199,25 +189,24 @@ header{
     box-shadow: 0 5px 15px rgba(255, 255, 255, .3);
 }
 
-/* Register section styling */
-.loginbox > div:last-child {
+/* Register section */
+.loginbox .register-link {
     text-align: center;
-    margin-bottom: 0;
 }
 
-.loginbox > div:last-child p {
+.loginbox .register-link p {
     color: #fff;
     font-size: 14px;
     margin-bottom: 10px;
 }
 
-.loginbox > div:last-child a {
+.loginbox .register-link a {
     color: #fff;
     text-decoration: none;
     font-weight: 600;
     font-size: 14px;
 }
 
-.loginbox > div:last-child a:hover {
+.loginbox .register-link a:hover {
     text-decoration: underline;
 }

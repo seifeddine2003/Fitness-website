@@ -26,6 +26,13 @@ db.connect((err) => {
     console.log("Connected to MySQL database!");
 });
 
+// Optional: test a query
+db.query("SELECT 1 + 1 AS result", (err, results) => {
+    if (err) console.error("Test query failed:", err);
+    else console.log("Test query result:", results);
+});
+
+
 // ✅ Route for login
 app.post("/login", (req, res) => {
     const { email, password } = req.body;
@@ -53,4 +60,3 @@ app.post("/login", (req, res) => {
 app.listen(3000, () => {
     console.log("Server running on http://localhost:3000");
 });
-console.log("Received login:", email, password);
