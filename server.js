@@ -29,15 +29,12 @@ async function initDatabase() {
         const connection = await pool.getConnection();
         console.log("✅ Connected to MySQL database!");
 
-        // Check autocommit status
         const [autocommitStatus] = await connection.query("SELECT @@autocommit");
         console.log("📊 Autocommit status:", autocommitStatus);
 
-        // Test query
         const [testResult] = await connection.query("SELECT 1 + 1 AS result");
         console.log("Test query result:", testResult);
 
-        // Check which database we're using
         const [dbResult] = await connection.query("SELECT DATABASE() as db");
         console.log("🗄️ Current database:", dbResult[0].db);
 
@@ -104,89 +101,64 @@ app.post("/register", async (req, res) => {
         return res.status(400).json({ message: "Please fill in all required fields" });
     }
 
-    const connection = await pool.getConnection();
-
     try {
-        // Start transaction explicitly
-        await connection.beginTransaction();
-        console.log("🔄 Transaction started");
-
         // Check if user already exists
-        const [existingUsers] = await connection.query(
+        const [existingUsers] = await pool.query(
             "SELECT * FROM users WHERE email = ?",
             [email]
         );
 
         if (existingUsers.length > 0) {
-            await connection.rollback();
             return res.status(400).json({ message: "Email already registered" });
         }
 
-        // Insert new user
+        // Insert new user (autocommit is ON, so no need for explicit transaction)
         const sql = `
             INSERT INTO users
             (email, password, firstName, lastName, age, weight, height, phone, goalWeight, activityLevel)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
 
-        const [insertResult] = await connection.query(sql, [
+        const [insertResult] = await pool.query(sql, [
             email, password, firstName, lastName, age, weight, height, phone, goalWeight, activityLevel
         ]);
 
         console.log("📊 Insert result:", insertResult);
-        console.log("📊 Affected rows:", insertResult.affectedRows);
-        console.log("📊 Insert ID:", insertResult.insertId);
 
-        // Commit the transaction
-        await connection.commit();
-        console.log("✅ Transaction committed");
-
-        // Verify the insert
-        const [verifyResult] = await connection.query(
+        // Verify insert
+        const [verifyResult] = await pool.query(
             "SELECT * FROM users WHERE email = ?",
             [email]
         );
 
-        console.log("🔍 Verification query - Found users:", verifyResult.length);
-        if (verifyResult.length > 0) {
-            console.log("🔍 User data:", verifyResult[0]);
-        } else {
-            console.log("⚠️ WARNING: User not found after insert!");
-        }
-
-        // Double-check with COUNT
-        const [countResult] = await connection.query("SELECT COUNT(*) as total FROM users");
-        console.log("📊 Total users in database:", countResult[0].total);
-
         res.status(201).json({
             message: "User registered successfully",
-            verified: verifyResult.length > 0
+            user: verifyResult[0]
         });
 
     } catch (err) {
-        await connection.rollback();
         console.error("❌ Registration error:", err);
         res.status(500).json({ message: "Failed to register user", error: err.message });
-    } finally {
-        connection.release();
     }
 });
 
-// ✅ NEW ROUTE: View all users
-app.get("/users", async (req, res) => {
+// ✅ Route: View all users
+app.get('/', async (req, res) => {
     try {
-        const [users] = await pool.query("SELECT * FROM users ORDER BY id DESC");
-        res.json({
-            count: users.length,
-            users: users
-        });
+        const [results] = await pool.query('SELECT * FROM users');
+        res.json(results);
     } catch (err) {
-        console.error("❌ Error fetching users:", err);
-        res.status(500).json({ error: err.message });
+        console.error('❌ Error fetching users:', err);
+        res.status(500).json({ message: 'Database error', error: err.message });
     }
+});
+
+// ✅ Route: Quick server status check
+app.get('/status', (req, res) => {
+    res.send('Server is running ✅');
 });
 
 // ✅ Start server
-app.listen(3001, () => {
-    console.log("Server running on http://localhost:3001");
+app.listen(3000, () => {
+    console.log("Server running on http://localhost:3000");
 });
