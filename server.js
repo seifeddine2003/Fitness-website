@@ -1,6 +1,6 @@
 // server.js
 import express from "express";
-import mysql from "mysql2";
+import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 import cors from "cors";
 
@@ -10,53 +10,183 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ Connect to MySQL
-const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-});
+// ✅ Create connection pool with promises
+let pool;
 
-db.connect((err) => {
-    if (err) {
-        console.error("Database connection failed:", err);
-        return;
+async function initDatabase() {
+    try {
+        pool = mysql.createPool({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_NAME,
+            waitForConnections: true,
+            connectionLimit: 10,
+            queueLimit: 0
+        });
+
+        // Test connection
+        const connection = await pool.getConnection();
+        console.log("✅ Connected to MySQL database!");
+
+        // Check autocommit status
+        const [autocommitStatus] = await connection.query("SELECT @@autocommit");
+        console.log("📊 Autocommit status:", autocommitStatus);
+
+        // Test query
+        const [testResult] = await connection.query("SELECT 1 + 1 AS result");
+        console.log("Test query result:", testResult);
+
+        // Check which database we're using
+        const [dbResult] = await connection.query("SELECT DATABASE() as db");
+        console.log("🗄️ Current database:", dbResult[0].db);
+
+        connection.release();
+    } catch (err) {
+        console.error("❌ Database connection failed:", err);
+        process.exit(1);
     }
-    console.log("Connected to MySQL database!");
-});
+}
 
-// Optional: test a query
-db.query("SELECT 1 + 1 AS result", (err, results) => {
-    if (err) console.error("Test query failed:", err);
-    else console.log("Test query result:", results);
-});
-
+// Initialize database before starting server
+await initDatabase();
 
 // ✅ Route for login
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res) => {
     const { email, password } = req.body;
-    console.log("Login attempt:", email, password); // debug
+    console.log("Login attempt:", email);
 
-    const sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+    try {
+        const sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+        const [result] = await pool.query(sql, [email, password]);
 
-    db.query(sql, [email, password], (err, result) => {
-        if (err) {
-            console.error("Database query error:", err); // this shows the real error
-            return res.status(500).json({ message: "Server error", error: err });
-        }
-
-        console.log("Query result:", result); // debug
+        console.log("Query result count:", result.length);
 
         if (result.length > 0) {
             res.status(200).json({ message: "Login successful", user: result[0] });
         } else {
             res.status(401).json({ message: "Invalid credentials" });
         }
-    });
+    } catch (err) {
+        console.error("❌ Database query error:", err);
+        res.status(500).json({ message: "Server error", error: err.message });
+    }
+});
+
+// ✅ Route for user registration
+app.post("/register", async (req, res) => {
+    console.log("Incoming register data:", req.body);
+
+    let {
+        email, password, firstName, lastName, age, weight, height, phone, goalWeight, activityLevel
+    } = req.body;
+
+    // Convert numeric fields to numbers
+    age = Number(age);
+    weight = Number(weight);
+    height = Number(height);
+    goalWeight = Number(goalWeight);
+
+    console.log("📝 Processing registration for:", email);
+
+    // Validate required fields
+    if (
+        !firstName ||
+        !lastName ||
+        !email ||
+        !password ||
+        !age ||
+        !weight ||
+        !height ||
+        !goalWeight ||
+        !activityLevel
+    ) {
+        return res.status(400).json({ message: "Please fill in all required fields" });
+    }
+
+    const connection = await pool.getConnection();
+
+    try {
+        // Start transaction explicitly
+        await connection.beginTransaction();
+        console.log("🔄 Transaction started");
+
+        // Check if user already exists
+        const [existingUsers] = await connection.query(
+            "SELECT * FROM users WHERE email = ?",
+            [email]
+        );
+
+        if (existingUsers.length > 0) {
+            await connection.rollback();
+            return res.status(400).json({ message: "Email already registered" });
+        }
+
+        // Insert new user
+        const sql = `
+            INSERT INTO users
+            (email, password, firstName, lastName, age, weight, height, phone, goalWeight, activityLevel)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `;
+
+        const [insertResult] = await connection.query(sql, [
+            email, password, firstName, lastName, age, weight, height, phone, goalWeight, activityLevel
+        ]);
+
+        console.log("📊 Insert result:", insertResult);
+        console.log("📊 Affected rows:", insertResult.affectedRows);
+        console.log("📊 Insert ID:", insertResult.insertId);
+
+        // Commit the transaction
+        await connection.commit();
+        console.log("✅ Transaction committed");
+
+        // Verify the insert
+        const [verifyResult] = await connection.query(
+            "SELECT * FROM users WHERE email = ?",
+            [email]
+        );
+
+        console.log("🔍 Verification query - Found users:", verifyResult.length);
+        if (verifyResult.length > 0) {
+            console.log("🔍 User data:", verifyResult[0]);
+        } else {
+            console.log("⚠️ WARNING: User not found after insert!");
+        }
+
+        // Double-check with COUNT
+        const [countResult] = await connection.query("SELECT COUNT(*) as total FROM users");
+        console.log("📊 Total users in database:", countResult[0].total);
+
+        res.status(201).json({
+            message: "User registered successfully",
+            verified: verifyResult.length > 0
+        });
+
+    } catch (err) {
+        await connection.rollback();
+        console.error("❌ Registration error:", err);
+        res.status(500).json({ message: "Failed to register user", error: err.message });
+    } finally {
+        connection.release();
+    }
+});
+
+// ✅ NEW ROUTE: View all users
+app.get("/users", async (req, res) => {
+    try {
+        const [users] = await pool.query("SELECT * FROM users ORDER BY id DESC");
+        res.json({
+            count: users.length,
+            users: users
+        });
+    } catch (err) {
+        console.error("❌ Error fetching users:", err);
+        res.status(500).json({ error: err.message });
+    }
 });
 
 // ✅ Start server
-app.listen(3000, () => {
-    console.log("Server running on http://localhost:3000");
+app.listen(3001, () => {
+    console.log("Server running on http://localhost:3001");
 });

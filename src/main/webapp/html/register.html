@@ -5,16 +5,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
+  <!-- Link to CSS -->
   <link rel="stylesheet" href="../css/register.css">
-  <link rel="icon" type="image/jpg" href="../images/icon.png">
+  <link rel="icon" type="image/png" href="../images/icon.png">
 </head>
 <body>
+
 <header>
   <div>
-    <img src="../images/icon-removebg-preview.png" alt="website logo" class="logo">
+    <img src="../images/icon-removebg-preview.png" alt="Logo" class="logo">
   </div>
   <nav class="navigation">
-    <a href="index.html">Home</a>
+    <a href="homepage.html">Home</a>
     <a href="#">About</a>
     <a href="#">Contact</a>
   </nav>
@@ -22,60 +24,63 @@
 
 <div class="registerbox">
   <h2>Create Account</h2>
-  <form>
+
+  <form id="registerForm">
     <div class="input-row">
       <div class="input-box">
-        <input type="text" required>
+        <input type="text" name="firstName" required>
         <label>First Name</label>
       </div>
       <div class="input-box">
-        <input type="text" required>
+        <input type="text" name="lastName" required>
         <label>Last Name</label>
       </div>
     </div>
 
     <div class="input-box">
-      <input type="email" required>
+      <input type="email" name="email" required>
       <label>Email Address</label>
     </div>
 
     <div class="input-box">
-      <input type="tel" required>
+      <input type="tel" name="phone" required>
       <label>Phone Number</label>
     </div>
 
     <div class="input-row">
       <div class="input-box">
-        <input type="number" min="1" max="150" required>
+        <input type="number" name="age" min="1" max="150" required>
         <label>Age</label>
       </div>
       <div class="input-box">
-        <input type="number" min="30" max="300" step="0.1" required>
+        <input type="number" name="weight" min="30" max="300" step="0.1" required>
         <label>Weight (kg)</label>
       </div>
       <div class="input-box">
-        <input type="number" min="100" max="250" step="0.1" required>
+        <input type="number" name="height" min="100" max="250" step="0.1" required>
         <label>Height (cm)</label>
       </div>
     </div>
+
     <div class="input-box">
-      <input type="number" min="30" max="300" step="0.1" required>
+      <input type="number" name="goalWeight" min="30" max="300" step="0.1" required>
       <label>Goal Weight (kg)</label>
     </div>
+
     <div class="input-box">
-      <select required>
+      <select name="activityLevel" required>
         <option value="" disabled selected></option>
-        <option value="sedentary">Sedentary (little or no exercise)</option>
-        <option value="light">Lightly Active (light exercise 1-3 days/week)</option>
-        <option value="moderate">Moderately Active (moderate exercise 3-5 days/week)</option>
-        <option value="active">Very Active (hard exercise 6-7 days/week)</option>
-        <option value="extreme">Extremely Active (athlete training 2x/day)</option>
+        <option value="sedentary">Sedentary</option>
+        <option value="light">Lightly Active</option>
+        <option value="moderate">Moderately Active</option>
+        <option value="active">Very Active</option>
+        <option value="extreme">Extremely Active</option>
       </select>
       <label>Daily Activity Level</label>
     </div>
 
     <div class="input-box">
-      <input type="password" required>
+      <input type="password" name="password" required>
       <label>Password</label>
     </div>
 
@@ -85,5 +90,9 @@
       <p>Already have an account? <a href="login.html">Sign In</a></p>
     </div>
   </form>
+</div>
+
+<!-- Link to JS -->
+<script src="../js/register.js"></script>
 </body>
 </html>
