@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b422d08-a046-4aa0-975c-c46f33c6ce08" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dbsetup.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/chatbot.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/chatbot.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/chatbot.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/register.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/register.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/js/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/js/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/register.js" afterDir="false" />
     </list>
@@ -24,9 +22,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
-        <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -80,9 +78,9 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Seif\Desktop\my website\src\main\webapp\js" />
       <recent name="C:\Users\Seif\Desktop\my website" />
       <recent name="C:\Users\Seif\Desktop\my website\js" />
-      <recent name="C:\Users\Seif\Desktop\my website\src\main\webapp\js" />
       <recent name="C:\Users\Seif\Desktop\my website\src\main\webapp" />
       <recent name="C:\Users\Seif\Desktop\my website\src\main\webapp\html" />
     </key>
@@ -153,7 +151,12 @@
       <workItem from="1759842487492" duration="1882000" />
       <workItem from="1759844393380" duration="536000" />
       <workItem from="1759845002478" duration="5905000" />
-      <workItem from="1759857447943" duration="1724000" />
+      <workItem from="1759857447943" duration="2557000" />
+      <workItem from="1760104357396" duration="629000" />
+      <workItem from="1760262560706" duration="52000" />
+      <workItem from="1760377016518" duration="859000" />
+      <workItem from="1760608128530" duration="4725000" />
+      <workItem from="1760614138423" duration="8628000" />
     </task>
     <servers />
   </component>

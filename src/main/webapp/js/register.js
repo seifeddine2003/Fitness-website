@@ -1,26 +1,19 @@
-// register.js
 
-// Wait until the page is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("form");
-    const selects = document.querySelectorAll("select");
-
-    // Keep labels floated when a select has a value
-    selects.forEach(select => {
-        select.addEventListener("change", () => {
-            if (select.value) {
-                select.classList.add("has-value");
+    document.querySelectorAll('.input-box select').forEach(select => {
+        select.addEventListener('change',  function (){
+            if (this.value) {
+                this.classList.add('has-value');
             } else {
-                select.classList.remove("has-value");
+                this.classList.remove('has-value');
             }
         });
     });
 
-    // Handle form submission
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault(); // prevent page reload
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
 
-        // Collect form data using name attributes
         const data = {
             firstName: form.querySelector('input[name="firstName"]').value.trim(),
             lastName: form.querySelector('input[name="lastName"]').value.trim(),
@@ -35,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         try {
-            // Send data to backend
             const response = await fetch("http://localhost:3000/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -45,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const result = await response.json();
             console.log("Server response:", result);
 
-            // Show backend message
             if (response.ok && result.message === "User registered successfully") {
                 alert("✅ Account created successfully!");
                 form.reset();

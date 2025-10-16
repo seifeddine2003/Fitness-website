@@ -104,10 +104,11 @@ header {
     outline: none;
     transition: border-color 0.3s;
 }
-
-.input-box input:focus,
-.input-box select:focus {
-    border-color: #fff;
+.input-box select {
+    color: #fff; /* selected value */
+    background-color: rgba(0, 0, 0, 0.5); /* dropdown background */
+    appearance: none;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .input-box label {
@@ -166,14 +167,3 @@ header {
     text-decoration: underline;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .registerbox {
-        padding: 30px 20px;
-    }
-
-    .input-row {
-        flex-direction: column;
-        gap: 10px;
-    }
-}
