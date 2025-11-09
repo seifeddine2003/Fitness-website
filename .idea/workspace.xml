@@ -6,13 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7b422d08-a046-4aa0-975c-c46f33c6ce08" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/chatbot.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/chatbot/chatbot.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/homepage.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/chatbot.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/chatbot/chatbot.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/homepage.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/chatbot.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/chatbot/chatbot.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chatbot/chatbot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chatbot/chatbot.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chatbot/chatbot.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,11 +74,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Seif\Desktop\my website\src\chatbot" />
       <recent name="C:\Users\Seif\Desktop\my website\src\main\webapp\js" />
       <recent name="C:\Users\Seif\Desktop\my website" />
       <recent name="C:\Users\Seif\Desktop\my website\js" />
       <recent name="C:\Users\Seif\Desktop\my website\src\main\webapp" />
-      <recent name="C:\Users\Seif\Desktop\my website\src\main\webapp\html" />
     </key>
   </component>
   <component name="RunManager">
@@ -156,7 +152,7 @@
       <workItem from="1762166174019" duration="846000" />
       <workItem from="1762167567716" duration="365000" />
       <workItem from="1762180602063" duration="11000" />
-      <workItem from="1762707804003" duration="300000" />
+      <workItem from="1762707804003" duration="1027000" />
     </task>
     <servers />
   </component>

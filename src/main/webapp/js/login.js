@@ -16,7 +16,7 @@ document.getElementById("loginForm").addEventListener("submit", async (event) =>
         if (response.ok) {
             alert("Login successful!");
             console.log(data);
-        } else {y
+        } else {
             alert("Login failed: " + (data.message || "Unknown error"));
         }
     } catch (error) {
