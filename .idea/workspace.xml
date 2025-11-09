@@ -6,7 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="7b422d08-a046-4aa0-975c-c46f33c6ce08" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/chatbot.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/chatbot.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/chatbot.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/chatbot/chatbot.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/homepage.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/chatbot.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/chatbot/chatbot.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/homepage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/chatbot.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/chatbot/chatbot.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +54,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Seif/Desktop/my website&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Seif/Desktop/reactcourse&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -84,19 +90,6 @@
       <data-source id="b3b1372b-4116-4879-942a-5c7b033e19e9" />
       <script-text>select* from users;</script-text>
       <method v="2" />
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="my website" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="my website" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <recent_temporary>
       <list>
@@ -153,6 +146,17 @@
       <workItem from="1760614138423" duration="9307000" />
       <workItem from="1760720417590" duration="1820000" />
       <workItem from="1760723210039" duration="4425000" />
+      <workItem from="1760728701627" duration="86000" />
+      <workItem from="1761057653434" duration="950000" />
+      <workItem from="1761063744121" duration="481000" />
+      <workItem from="1761121128144" duration="131000" />
+      <workItem from="1761381609044" duration="80000" />
+      <workItem from="1761656613851" duration="874000" />
+      <workItem from="1761814174328" duration="9000" />
+      <workItem from="1762166174019" duration="846000" />
+      <workItem from="1762167567716" duration="365000" />
+      <workItem from="1762180602063" duration="11000" />
+      <workItem from="1762707804003" duration="300000" />
     </task>
     <servers />
   </component>

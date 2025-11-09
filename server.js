@@ -1,4 +1,3 @@
-// server.js
 import express from "express";
 import mysql from "mysql2/promise";
 import dotenv from "dotenv";
@@ -10,7 +9,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ Create connection pool with promises
 let pool;
 
 async function initDatabase() {
@@ -25,7 +23,6 @@ async function initDatabase() {
             queueLimit: 0
         });
 
-        // Test connection
         const connection = await pool.getConnection();
         console.log("✅ Connected to MySQL database!");
 
@@ -45,10 +42,8 @@ async function initDatabase() {
     }
 }
 
-// Initialize database before starting server
 await initDatabase();
 
-// ✅ Route for login
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
     console.log("Login attempt:", email);
@@ -70,7 +65,6 @@ app.post("/login", async (req, res) => {
     }
 });
 
-// ✅ Route for user registration
 app.post("/register", async (req, res) => {
     console.log("Incoming register data:", req.body);
 
@@ -78,7 +72,6 @@ app.post("/register", async (req, res) => {
         email, password, firstName, lastName, age, weight, height, phone, goalWeight, activityLevel
     } = req.body;
 
-    // Convert numeric fields to numbers
     age = Number(age);
     weight = Number(weight);
     height = Number(height);
@@ -86,7 +79,6 @@ app.post("/register", async (req, res) => {
 
     console.log("📝 Processing registration for:", email);
 
-    // Validate required fields
     if (
         !firstName ||
         !lastName ||
@@ -102,7 +94,6 @@ app.post("/register", async (req, res) => {
     }
 
     try {
-        // Check if user already exists
         const [existingUsers] = await pool.query(
             "SELECT * FROM users WHERE email = ?",
             [email]
@@ -112,7 +103,6 @@ app.post("/register", async (req, res) => {
             return res.status(400).json({ message: "Email already registered" });
         }
 
-        // Insert new user (autocommit is ON, so no need for explicit transaction)
         const sql = `
             INSERT INTO users
             (email, password, firstName, lastName, age, weight, height, phone, goalWeight, activityLevel)
@@ -125,7 +115,6 @@ app.post("/register", async (req, res) => {
 
         console.log("📊 Insert result:", insertResult);
 
-        // Verify insert
         const [verifyResult] = await pool.query(
             "SELECT * FROM users WHERE email = ?",
             [email]
@@ -142,7 +131,6 @@ app.post("/register", async (req, res) => {
     }
 });
 
-// ✅ Route: View all users
 app.get('/', async (req, res) => {
     try {
         const [results] = await pool.query('SELECT * FROM users');
@@ -153,12 +141,10 @@ app.get('/', async (req, res) => {
     }
 });
 
-// ✅ Route: Quick server status check
 app.get('/status', (req, res) => {
     res.send('Server is running ✅');
 });
 
-// ✅ Start server
 app.listen(3000, () => {
     console.log("Server running on http://localhost:3000");
 });
